@@ -301,10 +301,11 @@ const hgApi = hglib.viewer(
   { bounded: true },
 );
 
-hgApi.setBroadcastMousePositionGlobally(true);
+  hgApi.setBroadcastMousePositionGlobally(true);
 
-hgApi.on('viewConfig', () => {
-  console.log('View Config changed');
-});
+  hgApi.on('viewConfig', () => {
+    console.log('View Config changed');
+  });
+
 </script>
 </html>
