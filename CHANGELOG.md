@@ -4,6 +4,7 @@
 - Add a dialog to directly edit the view config in the browser
 - Replace ReactBootstrap modal with custom modal to not rely on Bootstrap and support Jupyter
 - Updated `pub-sub-es` to version `1.2.1` to fix a bug in the shorthand event unsubscription
+- Removed the redundant Horizontal 1D Heatmap track
 - Added an example of a map overlay
 - Improve performance of the `mousemove`-related event handling
 - Fix #648: Auto select and copy URL when exporting a view by link

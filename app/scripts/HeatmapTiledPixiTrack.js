@@ -16,6 +16,7 @@ import {
   absToChr,
   colorDomainToRgbaArray,
   colorToHex,
+  createSVGElement,
   download,
   ndarrayAssign,
   ndarrayFlatten,
@@ -735,7 +736,7 @@ class HeatmapTiledPixiTrack extends TiledPixiTrack {
   }
 
   exportColorBarSVG() {
-    const gColorbarArea = document.createElement('g');
+    const gColorbarArea = createSVGElement('g');
     gColorbarArea.setAttribute('class', 'color-bar');
 
     if (
@@ -754,10 +755,10 @@ class HeatmapTiledPixiTrack extends TiledPixiTrack {
       `translate(${this.pColorbarArea.x}, ${this.pColorbarArea.y})`,
     );
 
-    const rectColorbarArea = document.createElement('rect');
+    const rectColorbarArea = createSVGElement('rect');
     gColorbarArea.appendChild(rectColorbarArea);
 
-    const gColorbar = document.createElement('g');
+    const gColorbar = createSVGElement('g');
     gColorbarArea.appendChild(gColorbar);
 
     gColorbar.setAttribute(
@@ -784,7 +785,7 @@ class HeatmapTiledPixiTrack extends TiledPixiTrack {
     const colorHeight = (this.colorbarHeight) / barsToDraw;
 
     for (let i = 0; i < barsToDraw; i++) {
-      const rectColor = document.createElement('rect');
+      const rectColor = createSVGElement('rect');
       gColorbar.appendChild(rectColor);
 
       rectColor.setAttribute('x', 0);
@@ -804,7 +805,7 @@ class HeatmapTiledPixiTrack extends TiledPixiTrack {
       rectColor.setAttribute('style', `fill: rgb(${color[0]}, ${color[1]}, ${color[2]})`);
     }
 
-    const gAxisHolder = document.createElement('g');
+    const gAxisHolder = createSVGElement('g');
     gColorbarArea.appendChild(gAxisHolder);
     gAxisHolder.setAttribute('transform',
       `translate(${this.axis.pAxis.position.x},${this.axis.pAxis.position.y})`);
@@ -1139,11 +1140,11 @@ class HeatmapTiledPixiTrack extends TiledPixiTrack {
     if (super.exportSVG) {
       [base, track] = super.exportSVG();
     } else {
-      base = document.createElement('g');
+      base = createSVGElement('g');
       track = base;
     }
 
-    const output = document.createElement('g');
+    const output = createSVGElement('g');
     track.appendChild(output);
 
     output.setAttribute(
@@ -1153,13 +1154,13 @@ class HeatmapTiledPixiTrack extends TiledPixiTrack {
 
     for (const tile of this.visibleAndFetchedTiles()) {
       const rotation = tile.sprite.rotation * 180 / Math.PI;
-      const g = document.createElement('g');
+      const g = createSVGElement('g');
       g.setAttribute(
         'transform',
         `translate(${tile.sprite.x},${tile.sprite.y}) rotate(${rotation}) scale(${tile.sprite.scale.x},${tile.sprite.scale.y})`,
       );
 
-      const image = document.createElement('image');
+      const image = createSVGElement('image');
       image.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', tile.canvas.toDataURL());
       image.setAttribute('width', 256);
       image.setAttribute('height', 256);
@@ -1171,7 +1172,7 @@ class HeatmapTiledPixiTrack extends TiledPixiTrack {
     const gColorbar = this.exportColorBarSVG();
     track.appendChild(gColorbar);
 
-    return [base, base];
+    return [base, track];
   }
 
   zoomed(newXScale, newYScale, k, tx, ty) {

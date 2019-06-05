@@ -3,6 +3,7 @@ import { format } from 'd3-format';
 import HeatmapTiledPixiTrack from './HeatmapTiledPixiTrack';
 
 import { tileProxy } from './services';
+import { createSVGElement } from './utils';
 
 export default class HorizontalMultivecTrack extends HeatmapTiledPixiTrack {
   constructor(context, options) {
@@ -248,5 +249,47 @@ export default class HorizontalMultivecTrack extends HeatmapTiledPixiTrack {
     output += `Zoom level: ${tilePos[0]} tile position: ${tilePos[1]}`;
 
     return output;
+  }
+
+  exportSVG() {
+    let track = null;
+    let base = null;
+
+    if (super.exportSVG) {
+      [base, track] = super.exportSVG();
+    } else {
+      base = createSVGElement('g');
+      track = base;
+    }
+
+    const output = createSVGElement('g');
+    track.appendChild(output);
+
+    output.setAttribute(
+      'transform',
+      `translate(${this.pMain.position.x},${this.pMain.position.y}) scale(${this.pMain.scale.x},${this.pMain.scale.y})`,
+    );
+
+    for (const tile of this.visibleAndFetchedTiles()) {
+      const rotation = tile.sprite.rotation * 180 / Math.PI;
+      const g = createSVGElement('g');
+      g.setAttribute(
+        'transform',
+        `translate(${tile.sprite.x},${tile.sprite.y}) rotate(${rotation}) scale(${tile.sprite.scale.x},${tile.sprite.scale.y})`,
+      );
+
+      const image = createSVGElement('image');
+      image.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', tile.canvas.toDataURL());
+      image.setAttribute('width', tile.canvas.width);
+      image.setAttribute('height', tile.canvas.height);
+
+      g.appendChild(image);
+      output.appendChild(g);
+    }
+
+    const gColorbar = this.exportColorBarSVG();
+    track.appendChild(gColorbar);
+
+    return [base, track];
   }
 }
