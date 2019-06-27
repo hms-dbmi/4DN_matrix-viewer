@@ -1293,6 +1293,7 @@ export const TRACKS_INFO = [
     name: '2D Annotations',
     thumbnail: svgArrowheadDomainsIcon,
     availableOptions: [
+      'interactive',
       'labelPosition',
       'labelLeftMargin',
       'labelRightMargin',
@@ -1307,7 +1308,6 @@ export const TRACKS_INFO = [
       'rectangleDomainStrokeColor',
       'rectangleDomainOpacity',
       'minSquareSize',
-      'isClickable',
       'hoverColor',
       'selectColor',
       'exclude',
@@ -1316,6 +1316,7 @@ export const TRACKS_INFO = [
       'trackBorderBgAlpha',
     ],
     defaultOptions: {
+      interactive: true,
       labelColor: 'black',
       labelPosition: 'hidden',
       labelLeftMargin: 0,
@@ -1328,7 +1329,6 @@ export const TRACKS_INFO = [
       rectangleDomainStrokeColor: 'black',
       rectangleDomainOpacity: 0.6,
       minSquareSize: 'none',
-      isClickable: false,
       hoverColor: 'orange',
       selectColor: 'fuchsia',
       exclude: [],
