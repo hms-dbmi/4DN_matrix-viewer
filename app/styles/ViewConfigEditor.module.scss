@@ -2,7 +2,7 @@
 @import './sizes';
 @import './transitions';
 
-.view-config-editor-header {
+:global(.higlass) .view-config-editor-header {
   margin: (-1*$base)+px (-1*$base)+px 0 (-1*$base)+px;
   padding: $base+px;
   display: flex;
@@ -24,7 +24,7 @@
   }
 }
 
-.view-config-editor {
+:global(.higlass) .view-config-editor {
   position: absolute;
   top: (5*$base)+px;
   right: 0;

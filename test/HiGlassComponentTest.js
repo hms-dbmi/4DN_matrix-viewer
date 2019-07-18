@@ -14,7 +14,7 @@ import ReactDOM from 'react-dom';
 import slugid from 'slugid';
 
 import HiGlassComponent from '../app/scripts/HiGlassComponent';
-import HeatmapOptions from '../app/scripts/HeatmapOptions';
+import HeatmapColormapPicker from '../app/scripts/HeatmapColormapPicker';
 
 // Utils
 import {
@@ -1587,11 +1587,11 @@ describe('Simple HiGlassComponent', () => {
     });
 
     it('Ensures that the custom color map loads properly', (done) => {
-      // console.log('heatmap options:', HeatmapOptions);
+      // console.log('heatmap options:', HeatmapColormapPicker);
 
       hgc.instance().tiledPlots.aa.handleConfigureTrack(
         twoViewConfig.views[0].tracks.center[0].contents[0],
-        HeatmapOptions
+        HeatmapColormapPicker
       );
 
       waitForTilesLoaded(hgc.instance(), done);
@@ -1757,11 +1757,11 @@ describe('Simple HiGlassComponent', () => {
     });
 
     it('Ensures that the custom color map loads properly', (done) => {
-      // console.log('heatmap options:', HeatmapOptions);
+      // console.log('heatmap options:', HeatmapColormapPicker);
 
       hgc.instance().tiledPlots.aa.handleConfigureTrack(
         twoViewConfig.views[0].tracks.center[0].contents[0],
-        HeatmapOptions
+        HeatmapColormapPicker
       );
 
       waitForTilesLoaded(hgc.instance(), done);

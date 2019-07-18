@@ -2,7 +2,7 @@
 @import './sizes';
 @import './transitions';
 
-.dialog-header {
+:global(.higlass) .dialog-header {
   position: relative;
   z-index: 2;
   display: flex;
@@ -23,7 +23,7 @@
   }
 }
 
-.dialog-main-max-height {
+:global(.higlass) .dialog-main-max-height {
   position: absolute;
   z-index: 1;
   top: (4*$base)+px;
@@ -34,7 +34,8 @@
   overflow: auto;
 }
 
-.dialog-footer, .dialog-footer-max-height {
+:global(.higlass) .dialog-footer,
+:global(.higlass) .dialog-footer-max-height {
   display: flex;
   justify-content: space-between;
   margin: $base+px (-1*$base)+px 0 (-1*$base)+px;
@@ -42,13 +43,13 @@
   border-top: 1px solid $gray-light;
 }
 
-.dialog-footer, .dialog-footer-max-height {
+:global(.higlass) .dialog-footer-max-height {
   button {
     font-size: (1.4*$base)+px;
   }
 }
 
-.dialog-footer-max-height {
+:global(.higlass) .dialog-footer-max-height {
   position: absolute;
   z-index: 2;
   left: $base+px;
