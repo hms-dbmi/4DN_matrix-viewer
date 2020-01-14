@@ -1,3 +1,7 @@
+** Next Release **
+
+- Fix `api.hideTrackChooser`
+
 ## v1.8.0
 
 - Added the option to flip 2D annotations across the diagonal

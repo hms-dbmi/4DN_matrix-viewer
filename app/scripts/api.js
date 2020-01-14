@@ -364,7 +364,7 @@ const createApi = function api(context, pubSub) {
        * Hide the track chooser.
        */
       hideTrackChooser() {
-        this.setState({
+        self.setState({
           chooseTrackHandler: null,
         });
       },
