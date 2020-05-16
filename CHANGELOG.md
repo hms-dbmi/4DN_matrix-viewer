@@ -1,5 +1,9 @@
 # Release notes
 
+## Next release
+
+- Added `trackUid` and `viewUid` as properties in the object published to wheel event callback functions.
+
 ## v1.9.3
 
 - Consolidated track options of horizontal and vertical tracks

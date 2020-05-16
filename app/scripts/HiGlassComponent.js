@@ -4429,6 +4429,12 @@ class HiGlassComponent extends React.Component {
           ]
         : relPos;
 
+      const viewUid =
+        hoveredTiledPlot && hoveredTiledPlot.props
+          ? hoveredTiledPlot.props.uid
+          : undefined;
+      const trackUid = hoveredTrack ? hoveredTrack.id : undefined;
+
       const evtToPublish = {
         x: relPos[0],
         y: relPos[1],
@@ -4440,6 +4446,8 @@ class HiGlassComponent extends React.Component {
           hoveredTrack && hoveredTrack.flipText
             ? relTrackPos[0]
             : relTrackPos[1],
+        viewUid,
+        trackUid,
         track: hoveredTrack,
         origEvt: nativeEvent,
         sourceUid: this.uid,

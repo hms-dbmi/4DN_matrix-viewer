@@ -837,16 +837,18 @@ describe('API Tests', () => {
       const hgc = api.getComponent();
       waitForTilesLoaded(hgc, () => {
         api.on('wheel', e => {
-          expect(e.origEvt.clientX).toEqual(30);
-          expect(e.origEvt.clientY).toEqual(40);
+          expect(e.origEvt.clientX).toEqual(150);
+          expect(e.origEvt.clientY).toEqual(250);
+          expect(e.viewUid).toEqual('a');
+          expect(e.trackUid).toEqual('heatmap');
           done();
         });
 
         const canvas = findCanvas(div);
         // The wheel event that we expect to catch.
         const wheelEvent = {
-          clientX: 30,
-          clientY: 40,
+          clientX: 150,
+          clientY: 250,
           forwarded: true,
           target: canvas,
           nativeEvent: undefined,
