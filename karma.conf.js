@@ -1,7 +1,7 @@
 const webpackConfig = require('./webpack.config.js');
 require('babel-polyfill'); // eslint-disable-line import/no-extraneous-dependencies
 
-module.exports = config => {
+module.exports = (config) => {
   config.set({
     /** * maximum number of tries a browser will attempt in the case
      * of a disconnection */
@@ -10,7 +10,7 @@ module.exports = config => {
      * disconnecting from it (in ms). */
     browserNoActivityTimeout: 90000,
     basePath: '',
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'server-side'],
 
     files: [
       'node_modules/babel-polyfill/dist/polyfill.js',
@@ -90,6 +90,7 @@ module.exports = config => {
     plugins: [
       'karma-webpack',
       'karma-jasmine',
+      'karma-server-side',
       'karma-sourcemap-loader',
       'karma-chrome-launcher',
       'karma-phantomjs2-launcher',

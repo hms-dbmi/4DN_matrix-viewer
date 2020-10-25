@@ -12,6 +12,7 @@ services:
   - xvfb
 before_script:
   - export DISPLAY=:99.0
+  - export NODE_OPTIONS=--max_old_space_size=4096
   - npm install --quiet -g gulp
   - npm install -g jsdoc
   - npm clean-install

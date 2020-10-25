@@ -8,6 +8,8 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import { expect } from 'chai';
 
+import FetchMockHelper from './utils/FetchMockHelper';
+
 // Utils
 import {
   mountHGComponent,
@@ -29,6 +31,14 @@ import { matToy, matRealistic } from './testdata/matrix-data';
 configure({ adapter: new Adapter() });
 
 describe('Continuous scaling tests', () => {
+  // We can pass in the view conf as first argument to perform some
+  // basic compatibility checks. Since we have two view confs here, we skip this.
+  const fetchMockHelper = new FetchMockHelper(null, 'DenseDataExtrema');
+
+  beforeAll(async () => {
+    await fetchMockHelper.activateFetchMock();
+  });
+
   describe('DenseDataExtrema module', () => {
     it('should get precise extrema of toy vectors', () => {
       const dde = new DenseDataExtrema1D(vecToy);
@@ -85,7 +95,9 @@ describe('Continuous scaling tests', () => {
     let div = null;
 
     beforeAll(done => {
-      [div, hgc] = mountHGComponent(div, hgc, viewConf1DHorizontal, done);
+      [div, hgc] = mountHGComponent(div, hgc, viewConf1DHorizontal, done, {
+        extendedDelay: 1000 // additional delay in ms
+      });
     });
 
     it('Ensures HorizontalPoint1DPixiTrack has correct scale', () => {
@@ -223,7 +235,9 @@ describe('Continuous scaling tests', () => {
     let div = null;
 
     beforeAll(done => {
-      [div, hgc] = mountHGComponent(div, hgc, viewConf1DVertical, done);
+      [div, hgc] = mountHGComponent(div, hgc, viewConf1DVertical, done, {
+        extendedDelay: 1000 // additional delay in ms
+      });
     });
 
     it('Ensures leftmodified HorizontalPoint1DPixiTrack has correct scale', () => {
@@ -274,7 +288,8 @@ describe('Continuous scaling tests', () => {
     beforeAll(done => {
       [div, hgc] = mountHGComponent(div, hgc, viewConf2D, done, {
         style: 'width:600px; height:600px; background-color: lightgreen',
-        bounded: true
+        bounded: true,
+        extendedDelay: 1000
       });
     });
 
@@ -321,5 +336,9 @@ describe('Continuous scaling tests', () => {
     afterAll(() => {
       removeHGComponent(div);
     });
+  });
+
+  afterAll(async () => {
+    await fetchMockHelper.storeDataAndResetFetchMock();
   });
 });
